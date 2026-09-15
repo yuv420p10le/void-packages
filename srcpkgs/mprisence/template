@@ -1,6 +1,6 @@
 # Template file for 'mprisence'
 pkgname=mprisence
-version=1.8.3
+version=1.8.5
 revision=1
 build_style=cargo
 hostmakedepends="pkg-config"
@@ -11,7 +11,7 @@ license="MIT"
 homepage="https://github.com/lazykern/mprisence"
 changelog="https://raw.githubusercontent.com/lazykern/mprisence/refs/heads/main/CHANGELOG.md"
 distfiles="https://github.com/lazykern/mprisence/archive/refs/tags/v${version}.tar.gz"
-checksum=b916fdfacf08fbf8f692cb65e91d9083d80df07ab83ef94123e168def974afc3
+checksum=51e19e40326c97e8b3e8a91b7f2152493d3c901f60a39bca6b4f3aec1fcca587
 
 pre_build() {
 	rm .cargo/config.toml # forces lld linker which isn't installed by default
