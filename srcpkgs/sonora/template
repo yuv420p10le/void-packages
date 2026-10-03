@@ -1,0 +1,30 @@
+# Template file for 'sonora'
+pkgname=sonora
+version=0.42.1
+revision=1
+build_style=cargo
+hostmakedepends="pkg-config cmake"
+makedepends="alsa-lib-devel fontconfig-devel libxcb-devel libxkbcommon-devel sqlite-devel"
+depends=""
+short_desc="Native music streaming client with Rust and GPUI"
+maintainer="Worf <snowy+git@riseup.net>"
+license="GPL-3.0-or-later"
+homepage="https://github.com/sonorahq/sonora"
+changelog="https://raw.githubusercontent.com/sonorahq/sonora/refs/heads/main/CHANGELOG.md"
+distfiles="https://github.com/sonorahq/sonora/archive/refs/tags/v${version}.tar.gz"
+checksum=daa81ac7b7cf0d30007389c2f4b3dbde1439b3f6f03c708a9ebf71de03cf8241
+
+pre_build(){
+    rm -f .cargo/config.toml # forces mold linker, not installed by default
+}
+
+do_install(){
+    vbin target/${XBPS_RUST_TARGET}/release/sonora
+    vinstall assets/linux/sonora.desktop 644 /usr/share/applications
+    vinstall assets/linux/sonora.svg 644 /usr/share/icons/hicolor/scalable/apps
+
+    for size in 16 24 32 48 64 128 256 512; do
+        vinstall assets/linux/icons/hicolor/${size}x${size}/apps/sonora.png 644 /usr/share/icons/hicolor/${size}x${size}/apps
+    done
+
+}
